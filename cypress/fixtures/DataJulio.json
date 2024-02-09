@@ -1,0 +1,33 @@
+{
+"nombre": [
+    "Juan",
+    "Carlos"],
+"apellido": [
+    "Solarte",
+ "Ante"],
+"fechaNacimiento":[
+"oct",
+"1991"],
+"email": [
+    "juancarloss+6666@unicauca.edu.co",
+    "pruebas230@yopmail.com",
+    "pruebas60@yopmail.com",
+    "pruebas90@yopmail.com",
+    "pruebas99@yopmail.com",
+    "pruebas55@yopmail.com"],
+"genero": [
+    "Masculino",
+    "Femenino",
+    "No especificado"],
+"celular": "9876543281",
+"tarjeta_loyalty": ["23336357",
+"20807700",
+"24656131",
+"13999604",
+"7046583"],
+"password": [
+    "Omni2022",
+    "Pruebas123",
+    "Prueba1", 
+    "pruebas1"]
+}
