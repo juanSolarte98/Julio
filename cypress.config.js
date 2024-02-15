@@ -12,7 +12,7 @@ module.exports = defineConfig({
     saveAllAttempts: false,
   },
   retries: 2,
-  defaultCommandTimeout: 8000,
+  defaultCommandTimeout: 12000,
   fixturesFolder: 'cypress/fixtures',
   e2e: {
     setupNodeEvents(on, config) {

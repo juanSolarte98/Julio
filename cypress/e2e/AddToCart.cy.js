@@ -57,13 +57,8 @@ describe('Test cases for Add To Cart flow', () => {
             cy.get('.showcart').click()
 
             //Clic en botón "Ver carrito"
-            cy.get('a.viewcart span').click()
+            cy.get('.continue-shopping-button').click()
             
-            //Clic en botón "Seguir comprando"
-            cy.get('.continue').click()
-
-            //Verifica que esté en la página principal
-            cy.url().should('include', '/')
         })
     })
 

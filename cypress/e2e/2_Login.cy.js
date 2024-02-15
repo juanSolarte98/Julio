@@ -70,7 +70,7 @@ describe('Test cases for Login flow', () => {
         cy.get('div.login-julio span').click({ force: true })
         // Llenar formulario de "Clientes registrados"
         cy.get('#email').type(dataUser.email[0])
-        cy.get('#pass').type(dataUser.password[1])
+        cy.get('#pass').type(dataUser.password[0])
         // Hacer clic en botón "Iniciar sesión"
         cy.get('#send2').click()
         // Hacer clic en el botón "Cerrar sesión"
