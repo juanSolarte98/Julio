@@ -67,7 +67,7 @@ describe('Test cases for Add To Cart flow', () => {
             cy.get('.message-success').should("be.visible")
 
             //Utiliza el comando personalizado para verificar que el contador del carrito se ha actualizado
-            cy.checkCartCounter(initialCount)
+            cy.checkCartCounter(initialCount+1)
 
             //Abre el MiniCart
             cy.get('.showcart').click()
