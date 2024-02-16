@@ -51,6 +51,51 @@ Cypress.Commands.add('getInitialCartCount', () => {
     });
   });
   
+  //Elimina todos los productos que hay en el carrito
+  Cypress.Commands.add('eliminarTodosLosProductos', () => {
+    const eliminarProductos = () => {
+      cy.get('body').then($body => {
+        // Verifica si existen enlaces de eliminación en la página
+        if ($body.find('a.action-delete').length > 0) {
+          // Hace clic en el primer enlace de eliminación encontrado y espera a que se complete la acción
+          cy.get('a.action-delete').first().click();
+          cy.wait(1000); // Ajusta este tiempo de espera según la respuesta de tu aplicación
+  
+          // Vuelve a llamar a eliminarProductos para comprobar si hay más productos para eliminar
+          eliminarProductos();
+        }
+      });
+    };
+  
+    eliminarProductos();
+  });
+
+  //Comando que ayuda a reducir cantidad y verificamonto
+  Cypress.Commands.add('reducirCantidadPrimerProductoYVerificar', (selectorTotalCarrito) => {
+    let totalAntes;
+  
+    // Captura el total del carrito antes de la acción
+    if (selectorTotalCarrito) {
+      cy.get(selectorTotalCarrito).invoke('text').then((textoTotal) => {
+        totalAntes = textoTotal.trim();
+      });
+    }
+  
+    // Hacer clic en el botón para reducir la cantidad del primer producto específico
+    cy.get('.control.button .action.primary.minus').first().click();
+  
+    // Asumiendo un breve retraso para la actualización del carrito
+    cy.wait(1000); // Ajustar según la necesidad
+  
+    // Comparar el total del carrito antes y después de la acción
+    if (selectorTotalCarrito) {
+      cy.get(selectorTotalCarrito).invoke('text').then((textoTotalDespues) => {
+        expect(textoTotalDespues.trim()).not.to.eq(totalAntes);
+      });
+    }
+  });
+  
+
   // -- Custom Command to Check Cart Counter --
   //Este comando verifica que el contador del carrito de compras se haya actualizado al valor esperado después de realizar una acción, como añadir un producto al carrito.
   Cypress.Commands.add('checkCartCounter', (expectedCount) => {
