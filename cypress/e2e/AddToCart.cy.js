@@ -77,6 +77,27 @@ describe('Test cases for Add To Cart flow', () => {
             
         })
     })
+
+    //ADDP-008: Verificar que no permita añadir un Producto Sin Stock al Carrito - Login
+    it('ADDP-008: Verify that it does not allow adding a Product Out of Stock to the Cart - Login', () => {
+      // Hacer clic en el botón "Iniciar sesión"
+      cy.get('div.login-julio span').click({ force: true })
+      // Llenar formulario de "Clientes registrados"
+      cy.get('#email').type(dataUser.email[0])
+      cy.get('#pass').type(dataUser.password[0])
+
+      cy.getInitialCartCount().then((initialCount) => {
+
+          // Hacer clic en una talla en el detalle del producto (PDP)
+          cy.visit("https://mcstaging.julio.com/blusa-animal-print-metalizado-con-corbatin-225286")
+
+          cy.wait(1000);
+
+          // Hacer clic en el botón "Agregar al carrito"
+          cy.get('#product-addtocart-button').should("not.exist")
+        
+      })
+  })
     // ADDP-010: Verificar que permita añadir un Producto al Carrito y Continuar Comprando - Login
     it('ADDP-010: Verify that it allows you to add a Product to the Cart and Continue Shopping - Login', () => {
       // Hacer clic en el botón "Iniciar sesión"
