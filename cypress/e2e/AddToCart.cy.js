@@ -36,7 +36,7 @@ describe('Test cases for Add To Cart flow', () => {
         });
       });
       // ADDP-005: Verificar que no permita añadir un Producto Sin Stock al Carrito - Guest
-      it.only('ADDP-003: Verify that it does not allow adding an Out of Stock Product to the Cart - Guest', () => {
+      it('ADDP-003: Verify that it does not allow adding an Out of Stock Product to the Cart - Guest', () => {
 
         cy.getInitialCartCount().then((initialCount) => {
 
