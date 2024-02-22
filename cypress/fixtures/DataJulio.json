@@ -5,6 +5,9 @@
 "apellido": [
     "Solarte",
  "Ante"],
+ "company": [
+    "Solarte",
+ "Ante"],
 "fechaNacimiento":[
 "oct",
 "1991"],
@@ -25,9 +28,22 @@
 "24656131",
 "13999604",
 "7046583"],
+"identification_number": ["23336357",
+"20807700",
+"24656131",
+"13999604",
+"7046583"],
 "password": [
     "Omni2022",
     "Pruebas123",
     "Prueba1", 
-    "pruebas1"]
+    "pruebas1"],
+"street": [
+    "Calle 11 #8-20*",
+    "Prueba Calle",
+    "Ave.Prueba", 
+    "Dirección prueba"],
+    
+"postcode": "0000"
+    
 }
