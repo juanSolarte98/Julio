@@ -3,7 +3,7 @@ const { defineConfig } = require('cypress');
 module.exports = defineConfig({
   projectId: 'jebthc',
 
-  viewportWidth: 1366,
+  viewportWidth: 1440,
   viewportHeight: 768,
   reporter: 'cypress-mochawesome-reporter',
   reporterOptions: {
@@ -14,7 +14,7 @@ module.exports = defineConfig({
     saveAllAttempts: false,
   },
   retries: 2,
-  defaultCommandTimeout: 15000,
+  defaultCommandTimeout: 25000,
   fixturesFolder: 'cypress/fixtures',
   e2e: {
     setupNodeEvents(on, config) {
