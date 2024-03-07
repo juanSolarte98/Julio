@@ -1,14 +1,22 @@
 /// <reference types='Cypress' />
+const faker = require('faker');
 
 describe('Test cases for Create Account flow', () => {
     let dataUser; // Variable para almacenar los datos cargados desde el JSON
+    let userData = {
+        randomName: faker.name.findName(),
+        randomEmail: faker.internet.email(),
+        randomPassword: faker.random.number()
+    }
 
+    
     before(() => {
         // Cargar los datos desde el archivo JSON
         cy.fixture('DataJulio.json').then((data) => {
             dataUser = data;
         });
     });
+
 
     beforeEach(() => {
     cy.visit('https://mcstaging.julio.com/')
@@ -29,7 +37,7 @@ describe('Test cases for Create Account flow', () => {
         cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])
         cy.get('.ui-state-default:eq(1)').click()
         cy.get('#celular').type(dataUser.celular)
-        cy.get('#email_address').type(dataUser.email[0])
+        cy.get('#email_address').type(userData.randomEmail)
         cy.get('#password').type(dataUser.password[0])
         cy.get('#password-confirmation').type(dataUser.password[0])
          //Hacer clic en botón "crear una cuenta" para confirmar el registro
@@ -75,7 +83,7 @@ describe('Test cases for Create Account flow', () => {
             cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])
             cy.get('.ui-state-default:eq(1)').click()
             cy.get('#celular').type(dataUser.celular)
-            cy.get('#email_address').type(dataUser.email[1])
+            cy.get('#email_address').type(userData.randomEmail)
             cy.get('#password').type(dataUser.password[0])
             cy.get('#password-confirmation').type(dataUser.password[0])
             //Hacer clic en botón "crear una cuenta" para confirmar el registro
@@ -84,7 +92,7 @@ describe('Test cases for Create Account flow', () => {
             cy.get('.message-success').should('exist')
     })
     // Test case #4: Verificar que no se pueda crear cuenta cuando haya un campo obligatorio sin diligenciar
-    it.only('CRE-004: Verify that an account cannot be created when a mandatory field is not filled in', () => {
+    it('CRE-004: Verify that an account cannot be created when a mandatory field is not filled in', () => {
        // Hacer clic en el botón "Iniciar sesión"
         cy.get('div.login-julio span').click({ force: true })
         // Hacer clic en el botón de "Crear una cuenta"
@@ -99,7 +107,7 @@ describe('Test cases for Create Account flow', () => {
         
         cy.get('#celular').type(dataUser.celular)
         
-        //cy.get('#email_address').type(dataUser.email[0]) NO DILIGENCIAR CAMPO
+        //cy.get('#email_address').type(userData.randomEmail) NO DILIGENCIAR CAMPO
         cy.get('#password').type(dataUser.password[0])
         cy.get('#password-confirmation').type(dataUser.password[0])
          //Hacer clic en botón "crear una cuenta" para confirmar el registro
@@ -122,7 +130,7 @@ it('CRE-005: Verify that the password is hidden by default', () => {
     cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])
     cy.get('.ui-state-default:eq(1)').click()
     cy.get('#celular').type(dataUser.celular)
-    cy.get('#email_address').type(dataUser.email[2])
+    cy.get('#email_address').type(userData.randomEmail)
     cy.get('#password').type(dataUser.password[0]).should('have.attr', 'type', 'password')  
     cy.get('#password-confirmation').type(dataUser.password[0]).should('have.attr', 'type', 'password')  
 })
@@ -140,7 +148,7 @@ it('CRE-005: Verify that the password is hidden by default', () => {
         cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])  
         cy.get('.ui-state-default:eq(1)').click()
         cy.get('#celular').type(dataUser.celular)
-        cy.get('#email_address').type(dataUser.email[3])
+        cy.get('#email_address').type(userData.randomEmail)
         cy.get('#password').type(dataUser.password[0])
         cy.get('#password-confirmation').type(dataUser.password[0])
         cy.get('input#socio_loyalty').click()
@@ -166,7 +174,7 @@ it('CRE-005: Verify that the password is hidden by default', () => {
         cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])
         cy.get('.ui-state-default:eq(1)').click()
         cy.get('#celular').type(dataUser.celular)
-        cy.get('#email_address').type(dataUser.email[5])
+        cy.get('#email_address').type(userData.randomEmail)
         cy.get('#password').type(dataUser.password[0])
         cy.get('#password-confirmation').type(dataUser.password[0])
         cy.get('#inscribir_programa').click()
@@ -188,7 +196,7 @@ it('CRE-005: Verify that the password is hidden by default', () => {
         cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])
         cy.get('.ui-state-default:eq(1)').click()
         cy.get('#celular').type(dataUser.celular)
-        cy.get('#email_address').type(dataUser.email[2])
+        cy.get('#email_address').type(userData.randomEmail)
         cy.get('#password').type(dataUser.password[0])
         cy.get('#password-confirmation').type(dataUser.password[1])
         //Hacer clic en botón "crear una cuenta" para confirmar el registro
@@ -233,7 +241,7 @@ it('CRE-005: Verify that the password is hidden by default', () => {
             cy.get('.ui-state-default:eq(1)').click()
             cy.get('#celular').type(dataUser.celular)
             
-            cy.get('#email_address').type(dataUser.email[2])
+            cy.get('#email_address').type(userData.randomEmail)
             cy.get('#password').type(dataUser.password[2])
             cy.get('#password-error').should('exist').and('contain','8')
         })
@@ -251,7 +259,7 @@ it('CRE-005: Verify that the password is hidden by default', () => {
             cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])
             cy.get('.ui-state-default:eq(1)').click()
             cy.get('#celular').type(dataUser.celular)    
-            cy.get('#email_address').type(dataUser.email[2])
+            cy.get('#email_address').type(userData.randomEmail)
             cy.get('#password').type(dataUser.password[3])
             cy.get('#password-error').should('exist').and('contain','3')
         })
