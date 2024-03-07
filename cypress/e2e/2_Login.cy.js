@@ -51,7 +51,7 @@ describe('Test cases for Login flow', () => {
         cy.get('.message-error').should('exist')
         })
 
-              // Test case #4: Verificar que permita realizar la recuperación de contraseña
+    // Test case #4: Verificar que permita realizar la recuperación de contraseña
       it('LOG-004: Verify that it allows password recovery', () => {
         // Hacer clic en el botón "Iniciar sesión"
         cy.get('div.login-julio span').click({ force: true })
