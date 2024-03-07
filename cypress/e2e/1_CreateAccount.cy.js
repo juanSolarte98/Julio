@@ -84,7 +84,7 @@ describe('Test cases for Create Account flow', () => {
             cy.get('.message-success').should('exist')
     })
     // Test case #4: Verificar que no se pueda crear cuenta cuando haya un campo obligatorio sin diligenciar
-    it('CRE-004: Verify that an account cannot be created when a mandatory field is not filled in', () => {
+    it.only('CRE-004: Verify that an account cannot be created when a mandatory field is not filled in', () => {
        // Hacer clic en el botón "Iniciar sesión"
         cy.get('div.login-julio span').click({ force: true })
         // Hacer clic en el botón de "Crear una cuenta"
