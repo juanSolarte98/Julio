@@ -1,13 +1,14 @@
 /// <reference types='Cypress' />
-const faker = require('faker');
+//const faker = require('faker');
 
 describe('Test cases for Create Account flow', () => {
     let dataUser; // Variable para almacenar los datos cargados desde el JSON
+    /*
     let userData = {
         randomName: faker.name.findName(),
         randomEmail: faker.internet.email(),
         randomPassword: faker.random.number()
-    }
+    }*/
 
     
     before(() => {
@@ -15,11 +16,14 @@ describe('Test cases for Create Account flow', () => {
         cy.fixture('DataJulio.json').then((data) => {
             dataUser = data;
         });
+        
     });
 
 
     beforeEach(() => {
     cy.visit('https://mcstaging.julio.com/')
+    
+    
     })
     
     context('Account creation flow', () => {
@@ -30,14 +34,15 @@ describe('Test cases for Create Account flow', () => {
         // Hacer clic en el botón de "Crear una cuenta"
         cy.get('.login-container .block-new-customer .action.primary').click()
         // Rellenar el formulario de registro con datos de prueba
-        cy.get('#firstname').type(dataUser.nombre[0])
-        cy.get('#lastname').type(dataUser.apellido[0])
+        //cy.get('#firstname').type(dataUser.nombre[0])
+        //cy.get('#lastname').type(dataUser.apellido[0])
+        cy.fillRegisterFormWithRandomData()
         cy.get('button.ui-datepicker-trigger.v-middle').click()
         cy.get('.ui-datepicker-year').should('be.visible').select(dataUser.fechaNacimiento[1])
         cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])
         cy.get('.ui-state-default:eq(1)').click()
         cy.get('#celular').type(dataUser.celular)
-        cy.get('#email_address').type(userData.randomEmail)
+        //cy.get('#email_address').type(userData.randomEmail)
         cy.get('#password').type(dataUser.password[0])
         cy.get('#password-confirmation').type(dataUser.password[0])
          //Hacer clic en botón "crear una cuenta" para confirmar el registro
