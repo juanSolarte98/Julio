@@ -121,7 +121,7 @@ Cypress.Commands.add('fillRegisterFormWithRandomData', () => {
  
   cy.get('#firstname').type(nombreAleatorio);
   cy.get('#lastname').type(apellidoAleatorio);
-  cy.get('#second_lastname').type(apellidoAleatorio);
+  //cy.get('#second_lastname').type(apellidoAleatorio);
   cy.get('#email_address').type(emailAleatorio);
   // Add more fields here if necessary
 });
