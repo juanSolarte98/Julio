@@ -32,7 +32,7 @@ describe('Test cases for Add To Cart flow', () => {
 
 
           // Utilizar el comando personalizado para verificar que el contador del carrito se ha actualizado
-          cy.checkCartCounter(initialCount + 1)
+          cy.checkCartCounter(initialCount + 1) //Reemplaza por la cantidad agregada
         });
       });
       // ADDP-005: Verificar que no permita añadir un Producto Sin Stock al Carrito - Guest

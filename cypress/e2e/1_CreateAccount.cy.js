@@ -194,7 +194,7 @@ describe('Test cases for Create Account flow', () => {
         cy.get('.message-success').should('exist')
     })
     // Test case #8: Verificar mensaje de error cuando la contraseña no coincide
-    it.only('CRE-008: Verify error message when the password does not match', () => {
+    it('CRE-008: Verify error message when the password does not match', () => {
         // Hacer clic en el botón "Iniciar sesión"
         cy.get('div.login-julio span').click({ force: true })
         // Hacer clic en el botón de "Crear una cuenta"
