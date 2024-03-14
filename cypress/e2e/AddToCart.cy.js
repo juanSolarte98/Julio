@@ -15,7 +15,7 @@ describe('Test cases for Add To Cart flow', () => {
 
     context('Add to cart flow', () => {
     //Test case #2: Verificar que permita añadir un Producto al Carrito desde la Página de Detalle de Producto (PDP) - Guest
-      it('ADDP-002: Verify that you can add a Product to the Cart from the Product Detail Page (PDP) - Guest', () => {
+    it('ADDP-002: Verify that you can add a Product to the Cart from the Product Detail Page (PDP) - Guest', () => {
 
         // Obtener el valor inicial del contador del carrito a través de comando getInitialCartCount (Revisar archivo commands.js)
         cy.getInitialCartCount().then((initialCount) => {
@@ -32,11 +32,12 @@ describe('Test cases for Add To Cart flow', () => {
 
 
           // Utilizar el comando personalizado para verificar que el contador del carrito se ha actualizado
-          cy.checkCartCounter(initialCount + 1)
+          //cy.checkCartCounter(initialCount + 1) //Reemplaza por la cantidad agregada
+          cy.get('li.item.product.product-item[data-role="product-item"]').its('length').should(initialCount+1)
         });
-      });
-      // ADDP-005: Verificar que no permita añadir un Producto Sin Stock al Carrito - Guest
-      it('ADDP-003: Verify that it does not allow adding an Out of Stock Product to the Cart - Guest', () => {
+    });
+    // ADDP-005: Verificar que no permita añadir un Producto Sin Stock al Carrito - Guest
+    it('ADDP-003: Verify that it does not allow adding an Out of Stock Product to the Cart - Guest', () => {
 
         cy.getInitialCartCount().then((initialCount) => {
 
@@ -52,8 +53,8 @@ describe('Test cases for Add To Cart flow', () => {
             
         })
     })
-      // ADDP-005: Verificar que permita añadir un Producto al Carrito y Continuar Comprando - Guest
-      it('ADDP-005: Verify that it allows you to add a Product to the Cart and Continue Shopping - Guest', () => {
+    // ADDP-005: Verificar que permita añadir un Producto al Carrito y Continuar Comprando - Guest
+    it('ADDP-005: Verify that it allows you to add a Product to the Cart and Continue Shopping - Guest', () => {
 
         cy.getInitialCartCount().then((initialCount) => {
 
@@ -97,7 +98,7 @@ describe('Test cases for Add To Cart flow', () => {
           cy.get('#product-addtocart-button').should("not.exist")
         
       })
-  })
+    })
     // ADDP-010: Verificar que permita añadir un Producto al Carrito y Continuar Comprando - Login
     it('ADDP-010: Verify that it allows you to add a Product to the Cart and Continue Shopping - Login', () => {
       // Hacer clic en el botón "Iniciar sesión"
@@ -126,7 +127,7 @@ describe('Test cases for Add To Cart flow', () => {
           cy.get('.continue-shopping-button').click()
           
       })
-  })
+    })
 
     })
 })

@@ -1,13 +1,14 @@
 /// <reference types='Cypress' />
-const faker = require('faker');
+//const faker = require('faker');
 
 describe('Test cases for Create Account flow', () => {
     let dataUser; // Variable para almacenar los datos cargados desde el JSON
+    /*
     let userData = {
         randomName: faker.name.findName(),
         randomEmail: faker.internet.email(),
         randomPassword: faker.random.number()
-    }
+    }*/
 
     
     before(() => {
@@ -15,11 +16,14 @@ describe('Test cases for Create Account flow', () => {
         cy.fixture('DataJulio.json').then((data) => {
             dataUser = data;
         });
+        
     });
 
 
     beforeEach(() => {
     cy.visit('https://mcstaging.julio.com/')
+    
+    
     })
     
     context('Account creation flow', () => {
@@ -30,14 +34,15 @@ describe('Test cases for Create Account flow', () => {
         // Hacer clic en el botón de "Crear una cuenta"
         cy.get('.login-container .block-new-customer .action.primary').click()
         // Rellenar el formulario de registro con datos de prueba
-        cy.get('#firstname').type(dataUser.nombre[0])
-        cy.get('#lastname').type(dataUser.apellido[0])
+        //cy.get('#firstname').type(dataUser.nombre[0])
+        //cy.get('#lastname').type(dataUser.apellido[0])
+        cy.fillRegisterFormWithRandomData()
         cy.get('button.ui-datepicker-trigger.v-middle').click()
         cy.get('.ui-datepicker-year').should('be.visible').select(dataUser.fechaNacimiento[1])
         cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])
         cy.get('.ui-state-default:eq(1)').click()
         cy.get('#celular').type(dataUser.celular)
-        cy.get('#email_address').type(userData.randomEmail)
+        //cy.get('#email_address').type(userData.randomEmail)
         cy.get('#password').type(dataUser.password[0])
         cy.get('#password-confirmation').type(dataUser.password[0])
          //Hacer clic en botón "crear una cuenta" para confirmar el registro
@@ -54,6 +59,8 @@ describe('Test cases for Create Account flow', () => {
         // Rellenar el formulario de registro con datos de prueba
         cy.get('#firstname').type(dataUser.nombre[0])
         cy.get('#lastname').type(dataUser.apellido[0])
+        //cy.fillRegisterFormWithRandomData()
+        
         cy.get('button.ui-datepicker-trigger.v-middle').click().should('be.visible')
         cy.get('.ui-datepicker-year').should('be.visible').select(dataUser.fechaNacimiento[1])
         cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])
@@ -74,8 +81,9 @@ describe('Test cases for Create Account flow', () => {
         // Hacer clic en el botón de "Crear una cuenta"
         cy.get('.login-container .block-new-customer .action.primary').click()
             // Rellenar el formulario de registro con datos de prueba
-            cy.get('#firstname').type(dataUser.nombre[0])
-            cy.get('#lastname').type(dataUser.apellido[0])
+            //cy.get('#firstname').type(dataUser.nombre[0])
+            //cy.get('#lastname').type(dataUser.apellido[0])
+            cy.fillRegisterFormWithRandomData()
             ///Hacer clic en checkbox "Suscribirse a boletín"
             cy.get('#is_subscribed').click()
             cy.get('button.ui-datepicker-trigger.v-middle').click().should('be.visible')
@@ -83,7 +91,7 @@ describe('Test cases for Create Account flow', () => {
             cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])
             cy.get('.ui-state-default:eq(1)').click()
             cy.get('#celular').type(dataUser.celular)
-            cy.get('#email_address').type(userData.randomEmail)
+            //cy.get('#email_address').type(userData.randomEmail)
             cy.get('#password').type(dataUser.password[0])
             cy.get('#password-confirmation').type(dataUser.password[0])
             //Hacer clic en botón "crear una cuenta" para confirmar el registro
@@ -117,23 +125,24 @@ describe('Test cases for Create Account flow', () => {
 })
     
     // Test case #5: Verificar que la contraseña este oculta por defecto
-it('CRE-005: Verify that the password is hidden by default', () => {
-    // Hacer clic en el botón "Iniciar sesión"
-    cy.get('div.login-julio span').click({ force: true })
-    // Hacer clic en el botón de "Crear una cuenta"
-    cy.get('.login-container .block-new-customer .action.primary').click()
-    // Rellenar el formulario de registro con datos de prueba
-    cy.get('#firstname').type(dataUser.nombre[1])
-    cy.get('#lastname').type(dataUser.apellido[1])
-    cy.get('button.ui-datepicker-trigger.v-middle').click().should('be.visible')
-    cy.get('.ui-datepicker-year').should('be.visible').select(dataUser.fechaNacimiento[1])
-    cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])
-    cy.get('.ui-state-default:eq(1)').click()
-    cy.get('#celular').type(dataUser.celular)
-    cy.get('#email_address').type(userData.randomEmail)
-    cy.get('#password').type(dataUser.password[0]).should('have.attr', 'type', 'password')  
-    cy.get('#password-confirmation').type(dataUser.password[0]).should('have.attr', 'type', 'password')  
-})
+    it('CRE-005: Verify that the password is hidden by default', () => {
+        // Hacer clic en el botón "Iniciar sesión"
+        cy.get('div.login-julio span').click({ force: true })
+        // Hacer clic en el botón de "Crear una cuenta"
+        cy.get('.login-container .block-new-customer .action.primary').click()
+        // Rellenar el formulario de registro con datos de prueba
+        //cy.get('#firstname').type(dataUser.nombre[0])
+        //cy.get('#lastname').type(dataUser.apellido[0])
+        cy.fillRegisterFormWithRandomData()
+        cy.get('button.ui-datepicker-trigger.v-middle').click().should('be.visible')
+        cy.get('.ui-datepicker-year').should('be.visible').select(dataUser.fechaNacimiento[1])
+        cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])
+        cy.get('.ui-state-default:eq(1)').click()
+        cy.get('#celular').type(dataUser.celular)
+        //cy.get('#email_address').type(userData.randomEmail)
+        cy.get('#password').type(dataUser.password[0]).should('have.attr', 'type', 'password')  
+        cy.get('#password-confirmation').type(dataUser.password[0]).should('have.attr', 'type', 'password')  
+    })
     // Test case #6: Verificar que se pueda registrar con cliente asociado al programa loyalty
     it('CRE-006: Verify that it is possible to register with a client associated with the loyalty program.', () => {
         // Hacer clic en el botón "Iniciar sesión"
@@ -141,14 +150,15 @@ it('CRE-005: Verify that the password is hidden by default', () => {
         // Hacer clic en el botón de "Crear una cuenta"
         cy.get('.login-container .block-new-customer .action.primary').click()
         // Rellenar el formulario de registro con datos de prueba
-        cy.get('#firstname').type(dataUser.nombre[1])
-        cy.get('#lastname').type(dataUser.apellido[1])
+        //cy.get('#firstname').type(dataUser.nombre[0])
+        //cy.get('#lastname').type(dataUser.apellido[0])
+        cy.fillRegisterFormWithRandomData()
         cy.get('button.ui-datepicker-trigger.v-middle').click().should('be.visible')
         cy.get('.ui-datepicker-year').should('be.visible').select(dataUser.fechaNacimiento[1])
         cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])  
         cy.get('.ui-state-default:eq(1)').click()
         cy.get('#celular').type(dataUser.celular)
-        cy.get('#email_address').type(userData.randomEmail)
+        //cy.get('#email_address').type(userData.randomEmail)
         cy.get('#password').type(dataUser.password[0])
         cy.get('#password-confirmation').type(dataUser.password[0])
         cy.get('input#socio_loyalty').click()
@@ -167,14 +177,15 @@ it('CRE-005: Verify that the password is hidden by default', () => {
         // Hacer clic en el botón de "Crear una cuenta"
         cy.get('.login-container .block-new-customer .action.primary').click()
         // Rellenar el formulario de registro con datos de prueba
-        cy.get('#firstname').type(dataUser.nombre[1])
-        cy.get('#lastname').type(dataUser.apellido[1])
+        //cy.get('#firstname').type(dataUser.nombre[0])
+        //cy.get('#lastname').type(dataUser.apellido[0])
+        cy.fillRegisterFormWithRandomData()
         cy.get('button.ui-datepicker-trigger.v-middle').click().should('be.visible')
         cy.get('.ui-datepicker-year').should('be.visible').select(dataUser.fechaNacimiento[1])
         cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])
         cy.get('.ui-state-default:eq(1)').click()
         cy.get('#celular').type(dataUser.celular)
-        cy.get('#email_address').type(userData.randomEmail)
+        //cy.get('#email_address').type(userData.randomEmail)
         cy.get('#password').type(dataUser.password[0])
         cy.get('#password-confirmation').type(dataUser.password[0])
         cy.get('#inscribir_programa').click()
@@ -189,14 +200,15 @@ it('CRE-005: Verify that the password is hidden by default', () => {
         // Hacer clic en el botón de "Crear una cuenta"
         cy.get('.login-container .block-new-customer .action.primary').click()
         // Rellenar el formulario de registro con datos de prueba
-        cy.get('#firstname').type(dataUser.nombre[0])
-        cy.get('#lastname').type(dataUser.apellido[0])
+        //cy.get('#firstname').type(dataUser.nombre[0])
+        //cy.get('#lastname').type(dataUser.apellido[0])
+        cy.fillRegisterFormWithRandomData()
         cy.get('button.ui-datepicker-trigger.v-middle').click().should('be.visible')
         cy.get('.ui-datepicker-year').should('be.visible').select(dataUser.fechaNacimiento[1])
         cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])
         cy.get('.ui-state-default:eq(1)').click()
         cy.get('#celular').type(dataUser.celular)
-        cy.get('#email_address').type(userData.randomEmail)
+        //cy.get('#email_address').type(userData.randomEmail)
         cy.get('#password').type(dataUser.password[0])
         cy.get('#password-confirmation').type(dataUser.password[1])
         //Hacer clic en botón "crear una cuenta" para confirmar el registro
@@ -204,8 +216,8 @@ it('CRE-005: Verify that the password is hidden by default', () => {
         //Verificar que aparezca mensaje de error
         cy.get('#password-confirmation-error').should('exist').should('have.text','Introduce el mismo valor otra vez.')
     })
-        // Test case #9: Verificar que no se pueda crear cuenta con un email registrado
-        it('CRE-009: Verify that it is not possible to create an account with a registered email address', () => {
+    // Test case #9: Verificar que no se pueda crear cuenta con un email registrado
+    it('CRE-009: Verify that it is not possible to create an account with a registered email address', () => {
             // Hacer clic en el botón "Iniciar sesión"
             cy.get('div.login-julio span').click({ force: true })
             // Hacer clic en el botón de "Crear una cuenta"
@@ -225,44 +237,46 @@ it('CRE-005: Verify that the password is hidden by default', () => {
             cy.contains('span', 'Registrarme').click({ force: true })
             //Verificar que aparezca mensaje de error
             cy.get('.message-error').should('exist')   
-        })
-        // Test case #10: Verificar que se presente mensaje de error cuando la contraseña no cumpla con el mínimo de longitud
-        it('CRE-010: Verify that an error message is displayed when the password does not meet the minimum length', () => {
-            // Hacer clic en el botón "Iniciar sesión"
-            cy.get('div.login-julio span').click({ force: true })
-            // Hacer clic en el botón de "Crear una cuenta"
-            cy.get('.login-container .block-new-customer .action.primary').click()
-            // Rellenar el formulario de registro con datos de prueba
-            cy.get('#firstname').type(dataUser.nombre[0])
-            cy.get('#lastname').type(dataUser.apellido[0])
-            cy.get('button.ui-datepicker-trigger.v-middle').click().should('be.visible')
-            cy.get('.ui-datepicker-year').should('be.visible').select(dataUser.fechaNacimiento[1])
-            cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])
-            cy.get('.ui-state-default:eq(1)').click()
-            cy.get('#celular').type(dataUser.celular)
-            
-            cy.get('#email_address').type(userData.randomEmail)
-            cy.get('#password').type(dataUser.password[2])
-            cy.get('#password-error').should('exist').and('contain','8')
-        })
-        // Test case #11: Verificar que se presente mensaje de error cuando la contraseña no cumpla con las diferentes clases de caracteres
-        it('CRE-011: Verify that an error message is displayed when the password does not comply with the different character classes', () => {
-            // Hacer clic en el botón "Iniciar sesión"
+    })
+    // Test case #10: Verificar que se presente mensaje de error cuando la contraseña no cumpla con el mínimo de longitud
+    it('CRE-010: Verify that an error message is displayed when the password does not meet the minimum length', () => {
+        // Hacer clic en el botón "Iniciar sesión"
         cy.get('div.login-julio span').click({ force: true })
         // Hacer clic en el botón de "Crear una cuenta"
         cy.get('.login-container .block-new-customer .action.primary').click()
-            // Rellenar el formulario de registro con datos de prueba
-            cy.get('#firstname').type(dataUser.nombre[0])
-            cy.get('#lastname').type(dataUser.apellido[0])
-            cy.get('button.ui-datepicker-trigger.v-middle').click().should('be.visible')
-            cy.get('.ui-datepicker-year').should('be.visible').select(dataUser.fechaNacimiento[1])
-            cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])
-            cy.get('.ui-state-default:eq(1)').click()
-            cy.get('#celular').type(dataUser.celular)    
-            cy.get('#email_address').type(userData.randomEmail)
-            cy.get('#password').type(dataUser.password[3])
-            cy.get('#password-error').should('exist').and('contain','3')
-        })
+        // Rellenar el formulario de registro con datos de prueba
+        //cy.get('#firstname').type(dataUser.nombre[0])
+        //cy.get('#lastname').type(dataUser.apellido[0])
+        cy.fillRegisterFormWithRandomData()
+        cy.get('button.ui-datepicker-trigger.v-middle').click().should('be.visible')
+        cy.get('.ui-datepicker-year').should('be.visible').select(dataUser.fechaNacimiento[1])
+        cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])
+        cy.get('.ui-state-default:eq(1)').click()
+        cy.get('#celular').type(dataUser.celular)
+        
+        //cy.get('#email_address').type(userData.randomEmail)
+        cy.get('#password').type(dataUser.password[2])
+        cy.get('#password-error').should('exist').and('contain','8')
+    })
+    // Test case #11: Verificar que se presente mensaje de error cuando la contraseña no cumpla con las diferentes clases de caracteres
+    it('CRE-011: Verify that an error message is displayed when the password does not comply with the different character classes', () => {
+        // Hacer clic en el botón "Iniciar sesión"
+    cy.get('div.login-julio span').click({ force: true })
+    // Hacer clic en el botón de "Crear una cuenta"
+    cy.get('.login-container .block-new-customer .action.primary').click()
+        // Rellenar el formulario de registro con datos de prueba
+        //cy.get('#firstname').type(dataUser.nombre[0])
+        //cy.get('#lastname').type(dataUser.apellido[0])
+        cy.fillRegisterFormWithRandomData()
+        cy.get('button.ui-datepicker-trigger.v-middle').click().should('be.visible')
+        cy.get('.ui-datepicker-year').should('be.visible').select(dataUser.fechaNacimiento[1])
+        cy.get('.ui-datepicker-month').should('be.visible').select(dataUser.fechaNacimiento[0])
+        cy.get('.ui-state-default:eq(1)').click()
+        cy.get('#celular').type(dataUser.celular)    
+        //cy.get('#email_address').type(userData.randomEmail)
+        cy.get('#password').type(dataUser.password[3])
+        cy.get('#password-error').should('exist').and('contain','3')
+    })
         
 })
 })
